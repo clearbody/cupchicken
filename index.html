@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>컵촌리 서버 위키</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --bg: #f4f7f5;
+    --card: #ffffff;
+    --text: #26332c;
+    --sub: #6d7a72;
+    --green: #4f9d69;
+    --green-dark: #36754d;
+    --green-light: #e8f5eb;
+    --border: #e2e9e4;
+    --shadow: 0 8px 25px rgba(45, 75, 57, 0.08);
+}
+
+* {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background:
+        radial-gradient(circle at 10% 0%, #e8f6eb 0, transparent 28%),
+        radial-gradient(circle at 90% 10%, #eef7e8 0, transparent 25%),
+        var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    line-height: 1.75;
+}
+
+/* 상단 */
+.header {
+    min-height: 360px;
+    padding: 90px 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background:
+        linear-gradient(rgba(20, 45, 28, .38), rgba(20, 45, 28, .52)),
+        url("cupchonri-bg.png");
+    background-size: cover;
+    background-position: center 48%;
+    background-repeat: no-repeat;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.header::before { content: none; }
+
+.header::after { content: none; }
+
+.logo {
+    font-size: 48px;
+    font-weight: 800;
+    margin: 0;
+    letter-spacing: -2px;
+}
+
+.subtitle {
+    margin: 12px 0 0;
+    font-size: 18px;
+    opacity: .92;
+}
+
+.header-desc {
+    max-width: 700px;
+    margin: 25px auto 0;
+    opacity: .85;
+}
+
+/* 레이아웃 */
+.layout {
+    max-width: 1400px;
+    margin: 35px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 250px minmax(0, 1fr);
+    gap: 30px;
+}
+
+/* 목차 */
+.sidebar {
+    position: sticky;
+    top: 20px;
+    align-self: start;
+    background: rgba(255,255,255,.92);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+}
+
+.sidebar-title {
+    font-size: 17px;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 9px 12px;
+    margin: 3px 0;
+    border-radius: 9px;
+    color: var(--sub);
+    text-decoration: none;
+    font-size: 14px;
+    transition: .2s;
+}
+
+.sidebar a:hover {
+    background: var(--green-light);
+    color: var(--green-dark);
+    transform: translateX(3px);
+}
+
+.sidebar .sub {
+    padding-left: 28px;
+    font-size: 13px;
+}
+
+/* 본문 */
+.content {
+    min-width: 0;
+}
+
+.section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 35px;
+    margin-bottom: 25px;
+    box-shadow: var(--shadow);
+    scroll-margin-top: 20px;
+}
+
+.section-head {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 18px;
+    margin-bottom: 25px;
+}
+
+.section-head h2 {
+    margin: 0;
+    font-size: 27px;
+    letter-spacing: -1px;
+}
+
+.section-head p {
+    margin: 5px 0 0;
+    color: var(--sub);
+}
+
+/* 강조 박스 */
+.info-box {
+    padding: 20px;
+    border-radius: 14px;
+    background: var(--green-light);
+    border-left: 5px solid var(--green);
+    margin: 18px 0;
+}
+
+.warning {
+    background: #fff7df;
+    border-left-color: #e4a72c;
+}
+
+/* 카드 */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 15px;
+}
+
+.card {
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 20px;
+    background: #fff;
+    transition: .2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,.06);
+}
+
+.card h3 {
+    margin: 0 0 8px;
+    font-size: 18px;
+}
+
+.card p {
+    color: var(--sub);
+    margin: 0;
+    font-size: 14px;
+}
+
+/* 직업 카드 */
+.job {
+    border-top: 4px solid var(--green);
+}
+
+.job-icon {
+    font-size: 30px;
+}
+
+.skill {
+    padding: 14px;
+    border-radius: 12px;
+    background: #f7faf8;
+    margin-top: 10px;
+}
+
+.skill strong {
+    display: block;
+    color: var(--green-dark);
+}
+
+/* API */
+.api-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.api-number {
+    font-size: 25px;
+    font-weight: 800;
+    color: var(--green-dark);
+}
+
+.api-reward {
+    font-weight: 700;
+    margin-top: 5px;
+}
+
+.tag {
+    display: inline-block;
+    background: var(--green-light);
+    color: var(--green-dark);
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    margin: 3px;
+}
+
+/* 리스트 */
+.clean-list {
+    padding-left: 0;
+    list-style: none;
+}
+
+.clean-list li {
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--border);
+}
+
+.clean-list li:last-child {
+    border-bottom: none;
+}
+
+/* 표 */
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 500px;
+}
+
+th, td {
+    padding: 13px;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+}
+
+th {
+    background: var(--green-light);
+    color: var(--green-dark);
+}
+
+td:first-child {
+    font-weight: 700;
+}
+
+/* 명령어 */
+.command {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 18px;
+    background: #f6f8f7;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+.command code {
+    background: #26332c;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 7px;
+    font-family: monospace;
+}
+
+/* 푸터 */
+footer {
+    text-align: center;
+    padding: 40px 20px 60px;
+    color: var(--sub);
+}
+
+/* 모바일 */
+@media (max-width: 850px) {
+    .header { min-height: 300px; padding: 75px 20px; background-position: center center; }
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: relative;
+        top: 0;
+    }
+
+    .logo {
+        font-size: 36px;
+    }
+
+    .section {
+        padding: 25px 20px;
+    }
+}
+
+
+/* ==================== 카테고리형 위키 ==================== */
+.content > .section {
+    display: none;
+    animation: wikiFade .22s ease;
+}
+
+.content > .section.active {
+    display: block;
+}
+
+@keyframes wikiFade {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.sidebar a.active {
+    background: var(--green-light);
+    color: var(--green-dark);
+    font-weight: 700;
+}
+
+.sidebar a.sub.active {
+    background: #f0f8f2;
+    color: var(--green-dark);
+}
+
+.wiki-location {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 16px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: var(--green-light);
+    color: var(--green-dark);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+@media (max-width: 850px) {
+    .sidebar {
+        position: sticky;
+        top: 10px;
+        z-index: 20;
+    }
+}
+</style>
+</head>
+<body>
+<header class="header">
+<h1 class="logo">🌳 컵촌리</h1>
+<div class="subtitle">우리의 일상이 모여, 세계수가 자라는 마을</div>
+<p class="header-desc">
+        다양한 생활과 만남을 즐기는 마인크래프트 힐링 생활 RPG 서버
+    </p>
+</header>
+<div class="layout">
+<!-- ==================== 목차 ==================== -->
+<nav class="sidebar">
+<div class="sidebar-title">📚 컵촌리 위키</div>
+
+<a data-wiki-target="intro" href="#intro">🏡 서버소개</a>
+<a data-wiki-target="life" href="#life">🌱 생활 콘텐츠</a>
+<a data-wiki-target="contents" href="#contents">📖 서버 콘텐츠</a>
+<a data-wiki-target="rules" href="#rules">📜 서버 규칙</a>
+<a data-wiki-target="notice" href="#notice">📢 안내사항</a>
+<a data-wiki-target="api" href="#api">🔌 API</a>
+<a class="sub" data-wiki-target="user-api" href="#user-api">👤 유저 API</a>
+<a class="sub" data-wiki-target="admin-api" href="#admin-api">👑 운영자 API</a>
+<a class="sub" data-wiki-target="api-effects" href="#api-effects">✨ API 효과</a>
+<a class="sub" data-wiki-target="api-items" href="#api-items">🎁 API 아이템</a>
+<a data-wiki-target="skills" href="#skills">🌳 직업별 스킬</a>
+<a data-wiki-target="enchant" href="#enchant">✨ 인챈트 토큰</a>
+<a data-wiki-target="commands" href="#commands">💻 명령어</a>
+
+</nav>
+<main class="content">
+<!-- ==================== 서버소개 ==================== -->
+<section class="section" id="intro">
+<div class="wiki-location">📚 컵촌리 위키</div><div class="section-head">
+<h2>🏡 서버소개</h2>
+<p>컵촌리에서 보내는 특별한 하루</p>
+</div>
+
+<div class="info-box">
+<strong>🏡 "컵촌리"에 오신 것을 환영합니다!</strong>
+<p>
+        컵촌리는 다양한 생활과 만남을 즐기는
+        <strong>마인크래프트 힐링 생활 RPG 서버</strong>입니다.
+    </p>
+</div>
+<p>
+    밭에서 작물을 기르고, 물가에서 낚싯대를 드리우고,
+    모은 재료로 따뜻한 요리를 만들어보세요.
+</p>
+<p>
+    숲과 광산을 탐험하거나 사냥을 즐기는 하루도 좋습니다.
+    각자의 자리에서 보낸 시간이 모여
+    <strong>컵촌리와 세계수의 성장</strong>을 만들어갑니다.
+</p>
+<div class="info-box">
+<h3>🌳 서버 목표 — 함께 키우는 세계수</h3>
+<p>
+        컵촌리의 중심에는 주민들과 함께 자라는 세계수가 있습니다.
+    </p>
+<p>
+        생활 활동과 일일 퀘스트, 다양한 활동과 접속 시간이
+        세계수의 성장 게이지로 쌓입니다.
+    </p>
+<p>
+        목표를 달성할 때마다 달라지는 세계수의 모습을 함께 만나보세요.
+    </p>
+<p>
+        목표 달성 기여도에 따른 개인 보상 또한 존재합니다!
+    </p>
+</div>
+
+</section>
+<!-- ==================== 생활 콘텐츠 ==================== -->
+<section class="section" id="life">
+<div class="wiki-location">📚 컵촌리 위키</div><div class="section-head">
+<h2>🌱 생활 콘텐츠</h2>
+<p>여섯 가지 생활 직업을 성장시키며 나만의 플레이 스타일을 만들어보세요.</p>
+</div>
+
+<div class="grid">
+<div class="card"><h3>🌾 농부</h3><p>다양한 작물을 재배합니다.</p></div>
+<div class="card"><h3>🎣 어부</h3><p>다양한 물고기를 낚습니다.</p></div>
+<div class="card"><h3>🍳 요리사</h3><p>재료를 활용해 맛있는 요리를 만듭니다.</p></div>
+<div class="card"><h3>🪓 벌목꾼</h3><p>숲에서 나무를 채집합니다.</p></div>
+<div class="card"><h3>⛏️ 채광꾼</h3><p>광산을 탐험하며 광물을 채굴합니다.</p></div>
+<div class="card"><h3>⚔️ 사냥꾼</h3><p>몬스터와 동물을 사냥합니다.</p></div>
+</div>
+<div class="info-box">
+<h3>📈 생활 성장과 승급</h3>
+<p>
+        생활 경험치를 쌓고 단계별 승급 과제에 도전하며
+        더 높은 등급으로 성장할 수 있습니다.
+    </p>
+<p>
+<strong>최대 50레벨</strong>까지 성장하며,
+        10레벨마다 승급 퀘스트가 존재합니다.
+    </p>
+<p>
+<span class="tag">초급</span>
+<span class="tag">→</span>
+<span class="tag">중급</span>
+<span class="tag">→</span>
+<span class="tag">상급</span>
+<span class="tag">→</span>
+<span class="tag">특급</span>
+<span class="tag">→</span>
+<span class="tag">장인</span>
+<span class="tag">→</span>
+<span class="tag">달인</span>
+</p>
+</div>
+<div class="info-box">
+<h3>✨ 생활 스킬과 세계수의 가지</h3>
+<p>
+        세계수의 가지를 모아 생활 스킬을 배우고
+        자신이 즐기는 생활을 더욱 풍성하게 만들어보세요.
+    </p>
+<div class="grid">
+<div class="card">
+<h3>15레벨</h3>
+<p>패시브 스킬</p>
+</div>
+<div class="card">
+<h3>30레벨</h3>
+<p>액티브 스킬</p>
+</div>
+<div class="card">
+<h3>45레벨</h3>
+<p>패시브 스킬</p>
+</div>
+</div>
+</div>
+
+</section>
+<!-- ==================== 서버 콘텐츠 ==================== -->
+<section class="section" id="contents">
+<div class="wiki-location">📚 컵촌리 위키</div><div class="section-head">
+<h2>📖 서버 콘텐츠</h2>
+<p>컵촌리에서 즐길 수 있는 다양한 콘텐츠입니다.</p>
+</div>
+
+<div class="grid">
+<div class="card">
+<h3>📖 아이템 도감 &amp; 바이옴 도감</h3>
+<p>각종 아이템을 수집하고 마인크래프트의 모든 바이옴을 탐험하며 도감을 채워보세요.</p>
+</div>
+<div class="card">
+<h3>🛠️ 제작 의뢰</h3>
+<p>기존 제작대에서는 도구 아이템이 비활성화되어 있으며 대장장이를 통해 제작해야 합니다.</p>
+</div>
+<div class="card">
+<h3>🪑 가구 &amp; 치장</h3>
+<p>다양한 가구와 치장 아이템으로 자신만의 스타일을 만들어보세요.</p>
+</div>
+<div class="card">
+<h3>🔒 감옥</h3>
+<p>밖에서 구경할 수 있는 감옥에서 석탄을 채굴하여 탈출해보세요.</p>
+</div>
+<div class="card">
+<h3>🌾 커스텀 농사</h3>
+<p>바닐라 마인크래프트에서는 만나볼 수 없는 특수 농작물을 수확할 수 있습니다.</p>
+</div>
+<div class="card">
+<h3>🎣 커스텀 낚시</h3>
+<p>다양한 등급의 물고기를 낚을 수 있습니다.</p>
+</div>
+<div class="card">
+<h3>🍳 요리</h3>
+<p>다양한 아이템을 활용하여 요리를 만들어보세요.</p>
+</div>
+<div class="card">
+<h3>🛠️ 편리한 도구</h3>
+<p>도구형 아이템들의 내구도가 무제한으로 변경됩니다.</p>
+</div>
+<div class="card">
+<h3>🎮 다양한 미니게임</h3>
+<p>퀴즈, 받아쓰기, 미로찾기, 파쿠르 등 다양한 미니게임이 존재합니다.</p>
+</div>
+<div class="card">
+<h3>📈 주식</h3>
+<p>일정 시간마다 변동하는 주가를 이용하여 매수와 매도를 해보세요.</p>
+</div>
+<div class="card">
+<h3>🏷️ 칭호</h3>
+<p>각종 칭호와 주문 제작 칭호를 활용해 자신을 뽐내보세요.</p>
+</div>
+</div>
+
+</section>
+<!-- ==================== 규칙 ==================== -->
+<section class="section" id="rules">
+<div class="wiki-location">📚 컵촌리 위키</div><div class="section-head">
+<h2>📜 서버 규칙</h2>
+<p>쾌적한 컵촌리를 위해 반드시 지켜주세요.</p>
+</div>
+
+<ol class="clean-list">
+<li>🚨 비방 가능 <small>(단, 아이템 복구 시 VOD가 없으면 복구 불가능)</small></li>
+<li>🏘️ 주민거래 금지</li>
+<li>⛏️ 수직굴 금지</li>
+<li>⚙️ 자동화 금지</li>
+<li>🚫 엑스레이 등 치트 프로그램 사용 금지</li>
+<li>🎯 도전미션도 가능하나 개수를 맞춰주셔야 합니다.</li>
+<li>🔥 무한용암은 인당 3개씩 허용</li>
+<li>🌾 커스텀 농사 경작지는 인당 128개까지 가능</li>
+<li>💰 아이템 거래는 정당한 대가를 주고받아야 합니다.</li>
+<li>⌨️ 사전에 안내되는 명령어를 제외한 명령어 사용 금지</li>
+<li>📌 다른 서버들에서 주로 금지하는 사항 역시 컵촌리에서도 금지됩니다.</li>
+</ol>
+
+</section>
+<!-- ==================== 안내 ==================== -->
+<section class="section" id="notice">
+<div class="wiki-location">📚 컵촌리 위키</div><div class="section-head">
+<h2>📢 안내사항</h2>
+<p>서버 이용 전 꼭 확인해주세요.</p>
+</div>
+
+<ol class="clean-list">
+<li>🗺️ X, Z 좌표는 <strong>+15,000 ~ -15,000</strong>까지 제한됩니다. 서버 상황에 따라 변동될 수 있습니다.</li>
+<li>🌎 월드는 야생1, 야생2, 지옥1, 지옥2, 엔더1, 엔더2입니다.</li>
+<li>🔒 청크 보호가 된 구역을 제외한 아이템은 보호되지 않습니다. 분실 시 복구되지 않습니다.</li>
+<li>🧑‍💻 운영자가 많지 않아 미응대 시간이 존재합니다. 추후 공개 예정입니다.</li>
+<li>🔄 야생 / 지옥 / 엔더는 <strong>4일에 1번</strong> 초기화되며 초기화 전날 공지합니다.</li>
+</ol>
+
+</section>
+<!-- ==================== API ==================== -->
+<section class="section" id="api">
+<div class="wiki-location">📚 컵촌리 위키</div><div class="section-head">
+<h2>🔌 API</h2>
+<p>컵촌리의 API 아이템을 사용하여 다양한 이벤트를 발생시켜보세요.</p>
+</div>
+
+<div id="user-api">
+<h3>👤 유저 API</h3>
+<div class="grid">
+<div class="card api-card">
+<div class="api-number">10개</div>
+<div class="api-reward">🥢 컵촌스틱 3개</div>
+</div>
+<div class="card api-card">
+<div class="api-number">50개</div>
+<div class="api-reward">✨ 랜덤 버프 / 디버프</div>
+</div>
+<div class="card api-card">
+<div class="api-number">100개</div>
+<div class="api-reward">📦 일반상자 1개</div>
+</div>
+<div class="card api-card">
+<div class="api-number">112개</div>
+<div class="api-reward">🔒 감옥 5분</div>
+</div>
+<div class="card api-card">
+<div class="api-number">222개</div>
+<div class="api-reward">👹 몬스터 소환 1~3마리</div>
+</div>
+<div class="card api-card">
+<div class="api-number">333개</div>
+<div class="api-reward">😈 랜덤 괴롭히기</div>
+</div>
+<div class="card api-card">
+<div class="api-number">500개</div>
+<div class="api-reward">📦 고급상자 1개</div>
+</div>
+<div class="card api-card">
+<div class="api-number">1000개</div>
+<div class="api-reward">📦 일반상자 11개</div>
+</div>
+<div class="card api-card">
+<div class="api-number">5000개</div>
+<div class="api-reward">📦 고급상자 11개</div>
+</div>
+<div class="card api-card">
+<div class="api-number">4444개</div>
+<div class="api-reward">💀 즉사 + 전체 고급상자 2개</div>
+<p>※ 인벤토리 세이브가 적용되지 않습니다.</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="admin-api">
+<h3>👑 운영자 API</h3>
+<div class="grid">
+<div class="card">
+<div class="api-number">300개</div>
+<div class="api-reward">📦 전체 일반상자 1개</div>
+</div>
+<div class="card">
+<div class="api-number">500개</div>
+<div class="api-reward">🎮 서버 퀴즈</div>
+<p>받아쓰기, 퀴즈 맞추기</p>
+</div>
+<div class="card">
+<div class="api-number">700개</div>
+<div class="api-reward">📦 전체 고급상자 1개</div>
+</div>
+<div class="card">
+<div class="api-number">1000개</div>
+<div class="api-reward">✨ 전체 경험치 3~4배</div>
+<p>30분 ~ 1시간</p>
+</div>
+</div>
+</div>
+
+</section>
+<!-- ==================== API 효과 ==================== -->
+<section class="section" id="api-effects">
+<div class="wiki-location">📚 컵촌리 위키</div><div class="section-head">
+<h2>✨ API 효과 목록</h2>
+<p>랜덤 버프와 몬스터, 괴롭히기 효과 목록입니다.</p>
+</div>
+
+<h3>✨ 랜덤 버프 / 디버프</h3>
+<div class="grid">
+<div class="card"><h3>💚 재생 3</h3><p>30초</p></div>
+<div class="card"><h3>🦘 점프강화</h3><p>3분</p></div>
+<div class="card"><h3>⛏️ 성급 3</h3><p>3분</p></div>
+<div class="card"><h3>💨 신속 2</h3><p>3분</p></div>
+<div class="card"><h3>🍀 행운 3</h3><p>3분</p></div>
+<div class="card"><h3>☁️ 공중부양</h3><p>30초</p></div>
+<div class="card"><h3>🍗 허기</h3><p>1분</p></div>
+<div class="card"><h3>☠️ 독 2</h3><p>30초</p></div>
+<div class="card"><h3>🐌 채굴피로</h3><p>1분</p></div>
+<div class="card"><h3>🧊 속도감소</h3><p>1분</p></div>
+</div>
+<h3>👹 몬스터 소환</h3>
+<div class="card">
+<span class="tag">좀비</span>
+<span class="tag">스켈레톤</span>
+<span class="tag">크리퍼</span>
+<span class="tag">마녀</span>
+<span class="tag">거미</span>
+<span class="tag">동굴거미</span>
+<span class="tag">변명자</span>
+<span class="tag">소환사</span>
+<span class="tag">약탈자</span>
+<span class="tag">파괴수</span>
+<span class="tag">워든</span>
+<span class="tag">블레이즈</span>
+<span class="tag">위더 스켈레톤</span>
+<span class="tag">피글린</span>
+<span class="tag">호글린</span>
+<span class="tag">셜커</span>
+</div>
+<h3>😈 랜덤 괴롭히기</h3>
+<div class="card">
+<span class="tag">공중텔포</span>
+<span class="tag">랜덤텔포</span>
+<span class="tag">순회공연 1분</span>
+<span class="tag">랜덤유저 TP</span>
+<span class="tag">강제귀환</span>
+<span class="tag">감옥 10분</span>
+<span class="tag">고급상자 1개</span>
+</div>
+
+</section>
+<!-- ==================== 상자 ==================== -->
+<section class="section" id="api-items">
+<div class="wiki-location">📚 컵촌리 위키</div><div class="section-head">
+<h2>🎁 API 보상 상자</h2>
+<p>API를 통해 획득할 수 있는 상자 및 아이템입니다.</p>
+</div>
+
+<div class="card">
+<h3>📦 일반상자</h3>
+<ul class="clean-list">
+<li>🥢 컵촌스틱 8 ~ 12개</li>
+<li>🪙 컵촌토큰 1개</li>
+<li>🛡️ 인벤세이브권 1장</li>
+<li>🏠 귀환권 1장</li>
+<li>↩️ 리턴권 1장</li>
+<li>🎭 랜덤 치장 상자 1개</li>
+<li>🪑 랜덤 가구 상자 1개</li>
+<li>✨ 랜덤 인챈트 토큰</li>
+<li>🌳 토지쿠폰</li>
+<li>📍 TPA권 1장</li>
+<li>🏷️ 칭호 랜덤 상자 1개</li>
+<li>📈 경험치 2배 쿠폰 2장</li>
+<li>🌿 세계수의 나뭇가지 1개</li>
+</ul>
+</div>
+<br/>
+<div class="card">
+<h3>📦 고급상자</h3>
+<ul class="clean-list">
+<li>🛡️ 인벤세이브권 5장</li>
+<li>🏠 귀환권 5장</li>
+<li>🪙 컵촌토큰 5개</li>
+<li>↩️ 리턴권 5장</li>
+<li>🪽 날개 랜덤 상자 1개</li>
+<li>🎭 랜덤 치장 상자 3개</li>
+<li>🪑 랜덤 가구 상자 3개</li>
+<li>🎫 초대권</li>
+<li>🔧 수선</li>
+<li>📖 도감쿠폰</li>
+<li>🌳 토지쿠폰</li>
+<li>📍 TPA권 3장</li>
+<li>👑 프리미엄 칭호권</li>
+<li>📈 경험치 3배 쿠폰</li>
+<li>✨ 인챈트계승권</li>
+<li>📦 가상창고 해금권</li>
+<li>🌿 세계수의 나뭇가지 3개</li>
+</ul>
+</div>
+<div class="info-box warning">
+    ⚠️ <strong>API는 추후 수정될 수 있습니다!</strong>
+</div>
+
+</section>
+<!-- ==================== API 아이템 설명 ==================== -->
+<section class="section" id="api-descriptions">
+<div class="wiki-location">📚 컵촌리 위키</div><div class="section-head">
+<h2>🎁 API 아이템 설명</h2>
+<p>각 아이템이 어떤 역할을 하는지 확인해보세요.</p>
+</div>
+
+<div class="grid">
+<div class="card">
+<h3>🛡️ 인벤세이브권</h3>
+<p>사망 시 인벤토리를 지켜줍니다. API 즉사에는 보호되지 않습니다.</p>
+</div>
+<div class="card">
+<h3>🏠 귀환권</h3>
+<p>마을 로비로 이동합니다.</p>
+</div>
+<div class="card">
+<h3>↩️ 리턴권</h3>
+<p>직전 사망 위치로 이동합니다. 안전을 보장하지 않으며 공허에서 사망했다면 다시 공허로 떨어질 수 있습니다.</p>
+</div>
+<div class="card">
+<h3>🎫 초대권</h3>
+<p>컵촌리에 이세계 스트리머를 소환합니다.</p>
+</div>
+<div class="card">
+<h3>📍 TPA권</h3>
+<p>원하는 스트리머에게 이동합니다. 상대방의 수락이 필요합니다.</p>
+</div>
+<div class="card">
+<h3>📈 경험치 2배 / 3배 쿠폰</h3>
+<p>일정 시간 동안 생활 경험치를 추가로 획득합니다.</p>
+</div>
+<div class="card">
+<h3>🪙 컵촌토큰</h3>
+<p>마일리지 상점에서 원하는 API 아이템과 교환할 수 있습니다.</p>
+</div>
+<div class="card">
+<h3>🪽 날개 랜덤 상자</h3>
+<p>각종 날개가 들어 있는 상자입니다.</p>
+</div>
+<div class="card">
+<h3>🎭 랜덤 치장 상자</h3>
+<p>각종 치장 아이템의 해금권이 들어 있습니다.</p>
+</div>
+<div class="card">
+<h3>🪑 랜덤 가구 상자</h3>
+<p>각종 가구가 들어 있는 상자입니다.</p>
+</div>
+<div class="card">
+<h3>📖 도감쿠폰</h3>
+<p>원하는 도감 아이템을 도감에 등록할 수 있습니다.</p>
+</div>
+<div class="card">
+<h3>🌳 토지쿠폰</h3>
+<p>1청크의 땅을 구매할 수 있습니다. 최대 4청크까지 가능합니다.</p>
+</div>
+<div class="card">
+<h3>👑 프리미엄 칭호권</h3>
+<p>원하는 칭호를 제작하여 등록할 수 있습니다.</p>
+</div>
+<div class="card">
+<h3>✨ 인챈트계승권</h3>
+<p>도구에 달려있는 인챈트를 동일한 종류의 다른 등급 도구로 계승할 수 있습니다.</p>
+</div>
+<div class="card">
+<h3>📦 가상창고 해금권</h3>
+<p>가상창고를 해금할 수 있습니다.</p>
+</div>
+<div class="card">
+<h3>🌿 세계수의 나뭇가지</h3>
+<p>생활 스킬을 해금할 수 있습니다.</p>
+</div>
+<div class="card">
+<h3>🥢 컵촌스틱</h3>
+<p>섭취 시 배고픔을 50% 채워줍니다.</p>
+</div>
+<div class="card">
+<h3>🏷️ 칭호 랜덤 상자</h3>
+<p>기존에 등록된 칭호 중 하나를 랜덤하게 습득합니다.</p>
+</div>
+<div class="card">
+<h3>✨ 랜덤 인챈트 토큰</h3>
+<p>도구의 인챈트 레벨을 최대 15레벨까지 상승, 하락 또는 유지시킵니다.</p>
+</div>
+</div>
+
+</section>
+<!-- ==================== 직업 스킬 ==================== -->
+<section class="section" id="skills">
+<div class="wiki-location">📚 컵촌리 위키</div><div class="section-head">
+<h2>🌳 직업별 스킬</h2>
+<p>각 직업은 15 / 30 / 45레벨에 특별한 스킬을 획득합니다.</p>
+</div>
+
+<div class="grid">
+<div class="card job">
+<div class="job-icon">🌾</div>
+<h3>농부</h3>
+<div class="skill">
+<strong>15레벨 · 알뜰한 파종</strong>
+            작물을 심을 때 씨앗 1개 반환
+        </div>
+<div class="skill">
+<strong>30레벨 · 성장의 기운</strong>
+            주변 반경 5블록 작물에 추가 성장 기회 부여
+        </div>
+<div class="skill">
+<strong>45레벨 · 끝나지 않은 수확</strong>
+            작물 수확 후 작물이 남을 확률 추가
+        </div>
+</div>
+<div class="card job">
+<div class="job-icon">🎣</div>
+<h3>어부</h3>
+<div class="skill">
+<strong>15레벨 · 물때 읽기</strong>
+            물고기가 입질하기까지의 대기시간 감소
+        </div>
+<div class="skill">
+<strong>30레벨 · 황금 물때</strong>
+            설정된 대상 어획물의 추첨 가중치 증가
+        </div>
+<div class="skill">
+<strong>45레벨 · 쌍둥이 어획</strong>
+            낚은 물고기와 같은 품질의 물고기 1개 추가
+        </div>
+</div>
+<div class="card job">
+<div class="job-icon">🍳</div>
+<h3>요리사</h3>
+<div class="skill">
+<strong>15레벨 · 섬세한 손맛</strong>
+            은별・금별 음식이 나올 확률 증가
+        </div>
+<div class="skill">
+<strong>30레벨 · 셰프의 집중</strong>
+            일반 음식은 은별, 은별 음식은 금별로 승급
+        </div>
+<div class="skill">
+<strong>45레벨 · 넉넉한 한 접시</strong>
+            요리 성공 시 같은 품질의 음식 1개 추가
+        </div>
+</div>
+<div class="card job">
+<div class="job-icon">🪓</div>
+<h3>벌목꾼</h3>
+<div class="skill">
+<strong>15레벨 · 숲의 손길</strong>
+            원목을 캘 때 파괴 속도 증가
+        </div>
+<div class="skill">
+<strong>30레벨 · 연속 벌목</strong>
+            연결된 같은 종류의 자연 원목을 함께 벌목
+        </div>
+<div class="skill">
+<strong>45레벨 · 좋은 목재</strong>
+            자연 원목을 캘 때 같은 원목 1개 추가
+        </div>
+</div>
+<div class="card job">
+<div class="job-icon">⛏️</div>
+<h3>채광꾼</h3>
+<div class="skill">
+<strong>15레벨 · 암반 적응</strong>
+            경험치 대상 광물 블록의 파괴속도 증가
+        </div>
+<div class="skill">
+<strong>30레벨 · 광맥의 축복</strong>
+            성급함 2 버프와 행운 +2 적용
+        </div>
+<div class="skill">
+<strong>45레벨 · 광물 응축</strong>
+            자연 광석에서 추가 광물・희귀 재료가 나올 확률 증가
+        </div>
+</div>
+<div class="card job">
+<div class="job-icon">⚔️</div>
+<h3>사냥꾼</h3>
+<div class="skill">
+<strong>15레벨 · 약점 파악</strong>
+            대상 몬스터・동물에게 주는 피해 증가
+        </div>
+<div class="skill">
+<strong>30레벨 · 사냥의 시간</strong>
+            충전된 검・창 근접 공격에 치명타 배율 1.5배 적용
+        </div>
+<div class="skill">
+<strong>45레벨 · 사냥의 결실</strong>
+            무기의 약탈 수치에 추가 약탈 레벨 합산
+        </div>
+</div>
+</div>
+<div class="info-box warning">
+    ⚠️ 스킬은 변동될 수 있습니다. 변동 시 공지 예정입니다.
+</div>
+
+</section>
+<!-- ==================== 인챈트 ==================== -->
+<section class="section" id="enchant">
+<div class="wiki-location">📚 컵촌리 위키</div><div class="section-head">
+<h2>✨ 인챈트 토큰 확률</h2>
+<p>랜덤 인챈트 토큰 사용 시 적용되는 확률입니다.</p>
+</div>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>현재 레벨</th>
+<th>상승</th>
+<th>유지</th>
+<th>하락</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 ~ 5레벨</td>
+<td>45%</td>
+<td>35%</td>
+<td>20%</td>
+</tr>
+<tr>
+<td>6 ~ 10레벨</td>
+<td>30%</td>
+<td>45%</td>
+<td>25%</td>
+</tr>
+<tr>
+<td>11 ~ 14레벨</td>
+<td>20%</td>
+<td>45%</td>
+<td>35%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="info-box warning">
+    ⚠️ 사용하기 위해서는 반드시 인챈트가 1 이상 부여되어 있어야 합니다. </p>
+    ⚠️ 서버 오픈 시 확률이 변동될 수 있습니다.
+</div>
+
+</section>
+<!-- ==================== 명령어 ==================== -->
+<section class="section" id="commands">
+<div class="wiki-location">📚 컵촌리 위키</div><div class="section-head">
+<h2>💻 명령어</h2>
+<p>컵촌리에서 사용할 수 있는 기본 명령어입니다.</p>
+</div>
+
+<div class="command">
+<span>🆘 도움 호출</span>
+<code>/도움</code>
+</div>
+<div class="command">
+<span>💬 귓속말</span>
+<code>/귓 이름 할말</code>
+</div>
+
+</section>
+</main>
+</div>
+<footer>
+    🌳 컵촌리 · 우리의 일상이 모여, 세계수가 자라는 마을
+    <br/>
+<small>Server Wiki</small>
+</footer>
+<script>
+(function () {
+    const content = document.querySelector('.content');
+    const sections = Array.from(document.querySelectorAll('main.content > .section'));
+    const links = Array.from(document.querySelectorAll('.sidebar a[data-wiki-target]'));
+
+    // Targets that live inside the API section should keep the API category open.
+    const parentMap = {
+        'user-api': 'api',
+        'admin-api': 'api'
+    };
+
+    function setActiveLink(targetId) {
+        links.forEach(link => link.classList.remove('active'));
+
+        // Exact target first.
+        const exact = links.find(link => link.dataset.wikiTarget === targetId);
+        if (exact) exact.classList.add('active');
+
+        // For nested API targets, also highlight the API parent when needed.
+        const parent = parentMap[targetId];
+        if (parent && !exact) {
+            const parentLink = links.find(link => link.dataset.wikiTarget === parent);
+            if (parentLink) parentLink.classList.add('active');
+        }
+    }
+
+    function getSectionForTarget(targetId) {
+        if (parentMap[targetId]) return document.getElementById(parentMap[targetId]);
+        return document.getElementById(targetId);
+    }
+
+    function showCategory(targetId, updateHash) {
+        const section = getSectionForTarget(targetId);
+        if (!section) return;
+
+        sections.forEach(sec => sec.classList.remove('active'));
+        section.classList.add('active');
+        setActiveLink(targetId);
+
+        // Keep the view at the top of the content area instead of continuing
+        // down a single long page.
+        const layoutTop = document.querySelector('.layout');
+        if (layoutTop) {
+            const top = layoutTop.getBoundingClientRect().top + window.scrollY - 15;
+            window.scrollTo({ top, behavior: 'smooth' });
+        }
+
+        // If a nested API item was selected, move to that subsection after
+        // the API panel becomes visible.
+        if (parentMap[targetId]) {
+            const nested = document.getElementById(targetId);
+            if (nested) {
+                setTimeout(() => nested.scrollIntoView({ behavior: 'smooth', block: 'start' }), 180);
+            }
+        }
+
+        if (updateHash) {
+            history.pushState({ wikiTarget: targetId }, '', '#' + targetId);
+        }
+    }
+
+    links.forEach(link => {
+        link.addEventListener('click', function (event) {
+            event.preventDefault();
+            showCategory(this.dataset.wikiTarget, true);
+        });
+    });
+
+    window.addEventListener('popstate', function () {
+        const target = location.hash.replace('#', '') || 'intro';
+        showCategory(target, false);
+    });
+
+    window.addEventListener('hashchange', function () {
+        const target = location.hash.replace('#', '') || 'intro';
+        showCategory(target, false);
+    });
+
+    // Start with the hash if present, otherwise show 서버소개 only.
+    const initial = location.hash.replace('#', '') || 'intro';
+    showCategory(initial, false);
+})();
+</script></body>
+</html>
